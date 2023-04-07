@@ -337,7 +337,8 @@ endfun
 fun! s:CloseIfOnlyNerdTreeLeft()
   if exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1 && winnr("$") == 1
     q
-    exe "vertical resize 20"
+    exe "vertical resize 31"
+    exe "wincmd w"
   endif
 endfun
 
@@ -585,7 +586,7 @@ fun! s:WinEnterHandler()
   let s:ei = &eventignore
   let &eventignore = 'VimEnter,TabEnter,TabLeave,WinEnter,WinLeave,BufWinEnter,BufRead'
   if g:nerdtree_tabs_autoclose
-    let timer = timer_start(1, {->execute("call s:CloseIfOnlyNerdTreeLeft()")}, { 'repeat': 1})
+    let timer = timer_start(1, {->execute("call s:CloseIfOnlyNerdTreeLeft()")}, {'repeat': 1})
   endif
   let &eventignore = s:ei
 endfun
